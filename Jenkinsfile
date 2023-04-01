@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        checkout(scm: [$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/teammira2023/izac.git']]], changelog: true, poll: true)
+        checkout(scm: [$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/teammira2023/izac2.git']]], changelog: true, poll: true)
       }
     }
 
@@ -22,20 +22,18 @@ pipeline {
       }
     }
 
-    stage('Environment Build') {
+    stage('Environment Build - init') {
       steps {
+        sh 'chmod +x disa.sh'
         sh 'chmod +x mya.sh'
         sh 'chmod +x mytina.sh'
-        sh 'cat mytina.sh'
+        sh './mya.sh'
       }
     }
 
-    stage('terraform init') {
+    stage('terraform validate') {
       steps {
-        sh 'echo $AWS_ACCESS_KEY_ID'
-        sh 'echo $AWS_SECRET_ACCESS_KEY'
-        sh 'echo $AWS_SESSION_TOKEN'
-        sh './mya.sh'
+        sh './disa.sh'
       }
     }
 
