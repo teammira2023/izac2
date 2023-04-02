@@ -69,12 +69,30 @@ module "instance2" {
   vpc_id = module.vpc.id
 }
 ################################################################################
-# Instance - Instance Zeepipe Provisioning
+# Instance - Instance Staging Provisioning
 # Create the EC2 instance and associate it with the Public  subnet
 ################################################################################
 module "instance3" {
   source = "./instance3"
   instance_name = "staging"
+  #vpc_name = "mira_vpc"
+  ec2_count     = 1
+  ami_id        = "ami-0557a15b87f6559cf"
+  instance_type = "t3.large"
+ # user_data         = data.template_cloudinit_config.config.rendered
+# depends_on = [
+ #data.template_cloudinit_config.config
+# ]
+  subnet_id = module.public_subnet.subnet_id
+  vpc_id = module.vpc.id
+}
+################################################################################
+# Instance - Instance Production Provisioning
+# Create the EC2 instance and associate it with the Public  subnet
+################################################################################
+module "instance4" {
+  source = "./instance4"
+  instance_name = "production"
   #vpc_name = "mira_vpc"
   ec2_count     = 1
   ami_id        = "ami-0557a15b87f6559cf"
