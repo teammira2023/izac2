@@ -19,7 +19,7 @@ resource "aws_instance" "production" {
  #user_data = base64encode(file(var.user_data_file)) # Encode user data script in base64
  #user_data     = base64encode(file("/home/ubuntu/mira/izac/scripts/myinstall.sh"))
  # Giving reference of security group
- vpc_security_group_ids = [ aws_security_group.sg-staging.id ]
+ vpc_security_group_ids = [ aws_security_group.sg-production.id ]
  subnet_id     = var.subnet_id
  associate_public_ip_address = true
  user_data         = data.template_cloudinit_config.config.rendered
